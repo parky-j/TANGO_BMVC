@@ -1,0 +1,275 @@
+{
+ "run": "imagenet100__LogitNormKD__ResNet18__seed0",
+ "method": "LogitNormKD",
+ "seed": 0,
+ "arch": "ResNet18",
+ "id_dataset": "imagenet100",
+ "ckpt": "<run>/output/fm_grid/fm/B11FM_dinov2_small_resnet18_imagenet100_seed0_LOG_SAVE_CHECKPOINT_FREQ-1100_CALIBRATION_EVAL_EVERY-10/student_best",
+ "id_acc": 0.828484833240509,
+ "knn_k": 50,
+ "vim_alpha": 7.272624147698674,
+ "vim_D_principal": 256,
+ "fit": "clean-train (test transforms)",
+ "ood": {
+  "imagenet_other": {
+   "MSP": {
+    "auroc": 0.9249387575757575,
+    "fpr95": 0.3882,
+    "id_mean": 0.30657412900166076,
+    "ood_mean": 0.026819744491856545,
+    "auroc_oriented": 0.9249387575757575,
+    "fpr95_oriented": 0.3882,
+    "flipped": false
+   },
+   "Entropy": {
+    "auroc": 0.9273222323232324,
+    "fpr95": 0.3933,
+    "id_mean": -3.355713333383889,
+    "ood_mean": -4.556413617640734,
+    "auroc_oriented": 0.9273222323232324,
+    "fpr95_oriented": 0.3933,
+    "flipped": false
+   },
+   "Energy": {
+    "auroc": 0.8930180707070706,
+    "fpr95": 0.5788,
+    "id_mean": 5.876017670583243,
+    "ood_mean": 4.783340985822678,
+    "auroc_oriented": 0.8930180707070706,
+    "fpr95_oriented": 0.5788,
+    "flipped": false
+   },
+   "MaxLogit": {
+    "auroc": 0.9222626161616163,
+    "fpr95": 0.4082,
+    "id_mean": 4.008610416024622,
+    "ood_mean": 0.8475090420722962,
+    "auroc_oriented": 0.9222626161616163,
+    "fpr95_oriented": 0.4082,
+    "flipped": false
+   },
+   "KNN": {
+    "auroc": 0.9263894040404039,
+    "fpr95": 0.4063,
+    "id_mean": 0.8203039011810765,
+    "ood_mean": 0.546137519556284,
+    "auroc_oriented": 0.9263894040404039,
+    "fpr95_oriented": 0.4063,
+    "flipped": false
+   },
+   "MDS": {
+    "auroc": 0.21115918181818183,
+    "fpr95": 0.9975,
+    "id_mean": -333.50131720485865,
+    "ood_mean": -168.9286493980839,
+    "auroc_oriented": 0.7888408181818182,
+    "fpr95_oriented": 0.6907,
+    "flipped": true
+   },
+   "ViM": {
+    "auroc": 0.4985864949494949,
+    "fpr95": 0.9539,
+    "id_mean": 1.5862896365586496,
+    "ood_mean": 1.4313907672974644,
+    "auroc_oriented": 0.5014135050505051,
+    "fpr95_oriented": 1.0,
+    "flipped": true
+   }
+  },
+  "svhn": {
+   "MSP": {
+    "auroc": 0.9934812786748864,
+    "fpr95": 0.038183773816840814,
+    "id_mean": 0.30657412900166076,
+    "ood_mean": 0.012402372887409873,
+    "auroc_oriented": 0.9934812786748864,
+    "fpr95_oriented": 0.038183773816840814,
+    "flipped": false
+   },
+   "Entropy": {
+    "auroc": 0.9955867913927225,
+    "fpr95": 0.024431468961278426,
+    "id_mean": -3.355713333383889,
+    "ood_mean": -4.602240671756888,
+    "auroc_oriented": 0.9955867913927225,
+    "fpr95_oriented": 0.024431468961278426,
+    "flipped": false
+   },
+   "Energy": {
+    "auroc": 0.9901603620718556,
+    "fpr95": 0.05447141979102643,
+    "id_mean": 5.876017670583243,
+    "ood_mean": 4.6911452478914075,
+    "auroc_oriented": 0.9901603620718556,
+    "fpr95_oriented": 0.05447141979102643,
+    "flipped": false
+   },
+   "MaxLogit": {
+    "auroc": 0.9934835912909055,
+    "fpr95": 0.03906730178242163,
+    "id_mean": 4.008610416024622,
+    "ood_mean": 0.2807382360560397,
+    "auroc_oriented": 0.9934835912909055,
+    "fpr95_oriented": 0.03906730178242163,
+    "flipped": false
+   },
+   "KNN": {
+    "auroc": 0.9937639455402208,
+    "fpr95": 0.03610940381069453,
+    "id_mean": 0.8203039011810765,
+    "ood_mean": 0.3628947651488838,
+    "auroc_oriented": 0.9937639455402208,
+    "fpr95_oriented": 0.03610940381069453,
+    "flipped": false
+   },
+   "MDS": {
+    "auroc": 0.004666401259056455,
+    "fpr95": 1.0,
+    "id_mean": -333.50131720485865,
+    "ood_mean": -35.42932425142043,
+    "auroc_oriented": 0.9953335987409435,
+    "fpr95_oriented": 0.021243085433312846,
+    "flipped": true
+   },
+   "ViM": {
+    "auroc": 0.11896189150261062,
+    "fpr95": 0.9999231714812539,
+    "id_mean": 1.5862896365586496,
+    "ood_mean": 2.871626256731935,
+    "auroc_oriented": 0.8810381084973894,
+    "fpr95_oriented": 1.0,
+    "flipped": true
+   }
+  },
+  "cifar100": {
+   "MSP": {
+    "auroc": 0.962030696969697,
+    "fpr95": 0.2195,
+    "id_mean": 0.30657412900166076,
+    "ood_mean": 0.017416911547631024,
+    "auroc_oriented": 0.962030696969697,
+    "fpr95_oriented": 0.2195,
+    "flipped": false
+   },
+   "Entropy": {
+    "auroc": 0.9624428585858585,
+    "fpr95": 0.2333,
+    "id_mean": -3.355713333383889,
+    "ood_mean": -4.589152144110203,
+    "auroc_oriented": 0.9624428585858585,
+    "fpr95_oriented": 0.2333,
+    "flipped": false
+   },
+   "Energy": {
+    "auroc": 0.9200578888888888,
+    "fpr95": 0.6352,
+    "id_mean": 5.876017670583243,
+    "ood_mean": 4.751562347888947,
+    "auroc_oriented": 0.9200578888888888,
+    "fpr95_oriented": 0.6352,
+    "flipped": false
+   },
+   "MaxLogit": {
+    "auroc": 0.9592526363636364,
+    "fpr95": 0.2483,
+    "id_mean": 4.008610416024622,
+    "ood_mean": 0.6199891377955675,
+    "auroc_oriented": 0.9592526363636364,
+    "fpr95_oriented": 0.2483,
+    "flipped": false
+   },
+   "KNN": {
+    "auroc": 0.9760971313131312,
+    "fpr95": 0.1136,
+    "id_mean": 0.8203039011810765,
+    "ood_mean": 0.4752908582866192,
+    "auroc_oriented": 0.9760971313131312,
+    "fpr95_oriented": 0.1136,
+    "flipped": false
+   },
+   "MDS": {
+    "auroc": 0.09583957575757575,
+    "fpr95": 1.0,
+    "id_mean": -333.50131720485865,
+    "ood_mean": -118.12076296851947,
+    "auroc_oriented": 0.9041604242424243,
+    "fpr95_oriented": 0.4582,
+    "flipped": true
+   },
+   "ViM": {
+    "auroc": 0.35722127272727267,
+    "fpr95": 0.9933,
+    "id_mean": 1.5862896365586496,
+    "ood_mean": 1.8586447386234157,
+    "auroc_oriented": 0.6427787272727273,
+    "fpr95_oriented": 1.0,
+    "flipped": true
+   }
+  },
+  "cifar10": {
+   "MSP": {
+    "auroc": 0.9721620202020202,
+    "fpr95": 0.1537,
+    "id_mean": 0.30657412900166076,
+    "ood_mean": 0.015694364002626388,
+    "auroc_oriented": 0.9721620202020202,
+    "fpr95_oriented": 0.1537,
+    "flipped": false
+   },
+   "Entropy": {
+    "auroc": 0.9711587070707071,
+    "fpr95": 0.1722,
+    "id_mean": -3.355713333383889,
+    "ood_mean": -4.594101973819733,
+    "auroc_oriented": 0.9711587070707071,
+    "fpr95_oriented": 0.1722,
+    "flipped": false
+   },
+   "Energy": {
+    "auroc": 0.923710898989899,
+    "fpr95": 0.6898,
+    "id_mean": 5.876017670583243,
+    "ood_mean": 4.748269126319885,
+    "auroc_oriented": 0.923710898989899,
+    "fpr95_oriented": 0.6898,
+    "flipped": false
+   },
+   "MaxLogit": {
+    "auroc": 0.968950808080808,
+    "fpr95": 0.1877,
+    "id_mean": 4.008610416024622,
+    "ood_mean": 0.5693855422034859,
+    "auroc_oriented": 0.968950808080808,
+    "fpr95_oriented": 0.1877,
+    "flipped": false
+   },
+   "KNN": {
+    "auroc": 0.9836752222222223,
+    "fpr95": 0.0695,
+    "id_mean": 0.8203039011810765,
+    "ood_mean": 0.4702961915075779,
+    "auroc_oriented": 0.9836752222222223,
+    "fpr95_oriented": 0.0695,
+    "flipped": false
+   },
+   "MDS": {
+    "auroc": 0.08167367676767677,
+    "fpr95": 1.0,
+    "id_mean": -333.50131720485865,
+    "ood_mean": -115.05751427669914,
+    "auroc_oriented": 0.9183263232323232,
+    "fpr95_oriented": 0.4821,
+    "flipped": true
+   },
+   "ViM": {
+    "auroc": 0.34501038383838384,
+    "fpr95": 0.9992,
+    "id_mean": 1.5862896365586496,
+    "ood_mean": 1.8877750584928912,
+    "auroc_oriented": 0.6549896161616162,
+    "fpr95_oriented": 1.0,
+    "flipped": true
+   }
+  }
+ }
+}

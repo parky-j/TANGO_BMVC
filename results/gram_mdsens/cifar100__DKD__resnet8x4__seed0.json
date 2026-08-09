@@ -1,0 +1,160 @@
+{
+ "method": "DKD",
+ "seed": 0,
+ "arch": "resnet8x4",
+ "id_dataset": "cifar100",
+ "ckpt": "<run>/output/fm_grid/fm/DKDFM_dinov2_small_resnet8x4_seed0_LOG_SAVE_CHECKPOINT_FREQ-1100_CALIBRATION_EVAL_EVERY-10/student_best",
+ "impl": "OpenOOD gram_postprocessor.py / mds_ensemble_postprocessor.py",
+ "gram_powers": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "mds_noise": 0.0014,
+ "mds_layers": 5,
+ "mds_alpha": "equal (no OOD-fitted alpha)",
+ "ood": {
+  "svhn": {
+   "GRAM": {
+    "auroc": 0.935761760525507,
+    "fpr95": 0.3080055316533497,
+    "id_mean": -26.447537942414417,
+    "ood_mean": -876.1474380815437,
+    "auroc_oriented": 0.935761760525507,
+    "fpr95_oriented": 0.3080055316533497,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.7641665507836508,
+    "fpr95": 0.8626690227412416,
+    "id_mean": -305.32476772384643,
+    "ood_mean": -383.17689059303814,
+    "auroc_oriented": 0.7641665507836508,
+    "fpr95_oriented": 0.8626690227412416,
+    "flipped": false
+   }
+  },
+  "tinyimagenet": {
+   "GRAM": {
+    "auroc": 0.6366699849999999,
+    "fpr95": 0.8871,
+    "id_mean": -26.447537942414417,
+    "ood_mean": -57.494037129525935,
+    "auroc_oriented": 0.6366699849999999,
+    "fpr95_oriented": 0.8871,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.521297635,
+    "fpr95": 0.9612,
+    "id_mean": -305.32476772384643,
+    "ood_mean": -306.9083112121582,
+    "auroc_oriented": 0.521297635,
+    "fpr95_oriented": 0.9612,
+    "flipped": false
+   }
+  },
+  "cifar10": {
+   "GRAM": {
+    "auroc": 0.6016967049999999,
+    "fpr95": 0.912,
+    "id_mean": -26.447537942414417,
+    "ood_mean": -42.13311573318756,
+    "auroc_oriented": 0.6016967049999999,
+    "fpr95_oriented": 0.912,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.4687064799999999,
+    "fpr95": 0.992,
+    "id_mean": -305.32476772384643,
+    "ood_mean": -286.77909870147704,
+    "auroc_oriented": 0.5312935200000001,
+    "fpr95_oriented": 0.9788,
+    "flipped": true
+   }
+  },
+  "lsun_c": {
+   "GRAM": {
+    "auroc": 0.94802617,
+    "fpr95": 0.2771,
+    "id_mean": -26.447537942414417,
+    "ood_mean": -771.7412846152283,
+    "auroc_oriented": 0.94802617,
+    "fpr95_oriented": 0.2771,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.621958065,
+    "fpr95": 0.9528,
+    "id_mean": -305.32476772384643,
+    "ood_mean": -330.52089008483887,
+    "auroc_oriented": 0.621958065,
+    "fpr95_oriented": 0.9528,
+    "flipped": false
+   }
+  },
+  "mnist": {
+   "GRAM": {
+    "auroc": 0.919341875,
+    "fpr95": 0.376,
+    "id_mean": -26.447537942414417,
+    "ood_mean": -243.0400634995222,
+    "auroc_oriented": 0.919341875,
+    "fpr95_oriented": 0.376,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.9485012150000001,
+    "fpr95": 0.4274,
+    "id_mean": -305.32476772384643,
+    "ood_mean": -500.5237842193604,
+    "auroc_oriented": 0.9485012150000001,
+    "fpr95_oriented": 0.4274,
+    "flipped": false
+   }
+  },
+  "dtd": {
+   "GRAM": {
+    "auroc": 0.9094352570921986,
+    "fpr95": 0.37890070921985813,
+    "id_mean": -26.447537942414417,
+    "ood_mean": -704.5739612630606,
+    "auroc_oriented": 0.9094352570921986,
+    "fpr95_oriented": 0.37890070921985813,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.8655362411347518,
+    "fpr95": 0.4271276595744681,
+    "id_mean": -305.32476772384643,
+    "ood_mean": -1023.9163388191386,
+    "auroc_oriented": 0.8655362411347518,
+    "fpr95_oriented": 0.4271276595744681,
+    "flipped": false
+   }
+  },
+  "places365": {
+   "GRAM": {
+    "auroc": 0.6456127013698629,
+    "fpr95": 0.8889041095890411,
+    "id_mean": -26.447537942414417,
+    "ood_mean": -53.963958749545945,
+    "auroc_oriented": 0.6456127013698629,
+    "fpr95_oriented": 0.8889041095890411,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.49926580547945204,
+    "fpr95": 0.9735890410958904,
+    "id_mean": -305.32476772384643,
+    "ood_mean": -297.96027363920865,
+    "auroc_oriented": 0.5007341945205479,
+    "fpr95_oriented": 0.9692328767123287,
+    "flipped": true
+   }
+  }
+ }
+}

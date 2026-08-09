@@ -1,0 +1,160 @@
+{
+ "method": "ELogitNorm-CE",
+ "seed": 0,
+ "arch": "resnet8x4",
+ "id_dataset": "cifar100",
+ "ckpt": "<run>/output/fm_grid/fm/B17_elogitnorm_only_resnet8x4_cifar100_seed0/student_best",
+ "impl": "OpenOOD gram_postprocessor.py / mds_ensemble_postprocessor.py",
+ "gram_powers": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "mds_noise": 0.0014,
+ "mds_layers": 5,
+ "mds_alpha": "equal (no OOD-fitted alpha)",
+ "ood": {
+  "svhn": {
+   "GRAM": {
+    "auroc": 0.9414276102489245,
+    "fpr95": 0.31188537185003073,
+    "id_mean": -750.942558685851,
+    "ood_mean": -20407.282531360983,
+    "auroc_oriented": 0.9414276102489245,
+    "fpr95_oriented": 0.31188537185003073,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.3035156614935464,
+    "fpr95": 0.9909726490473264,
+    "id_mean": -313.05944923934936,
+    "ood_mean": -239.49949999623453,
+    "auroc_oriented": 0.6964843385064536,
+    "fpr95_oriented": 0.855139827904118,
+    "flipped": true
+   }
+  },
+  "tinyimagenet": {
+   "GRAM": {
+    "auroc": 0.629531425,
+    "fpr95": 0.899,
+    "id_mean": -750.942558685851,
+    "ood_mean": -1626.847957038614,
+    "auroc_oriented": 0.629531425,
+    "fpr95_oriented": 0.899,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.4438795,
+    "fpr95": 0.9783,
+    "id_mean": -313.05944923934936,
+    "ood_mean": -285.8296469932556,
+    "auroc_oriented": 0.5561205,
+    "fpr95_oriented": 0.9519,
+    "flipped": true
+   }
+  },
+  "cifar10": {
+   "GRAM": {
+    "auroc": 0.5952800300000001,
+    "fpr95": 0.923,
+    "id_mean": -750.942558685851,
+    "ood_mean": -1197.7413985949886,
+    "auroc_oriented": 0.5952800300000001,
+    "fpr95_oriented": 0.923,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.452823215,
+    "fpr95": 0.9907,
+    "id_mean": -313.05944923934936,
+    "ood_mean": -282.4730312385559,
+    "auroc_oriented": 0.547176785,
+    "fpr95_oriented": 0.9545,
+    "flipped": true
+   }
+  },
+  "lsun_c": {
+   "GRAM": {
+    "auroc": 0.9555395300000001,
+    "fpr95": 0.2372,
+    "id_mean": -750.942558685851,
+    "ood_mean": -17027.718151153636,
+    "auroc_oriented": 0.9555395300000001,
+    "fpr95_oriented": 0.2372,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.40928108500000004,
+    "fpr95": 0.9899,
+    "id_mean": -313.05944923934936,
+    "ood_mean": -270.0137603942871,
+    "auroc_oriented": 0.590718915,
+    "fpr95_oriented": 0.9726,
+    "flipped": true
+   }
+  },
+  "mnist": {
+   "GRAM": {
+    "auroc": 0.926118815,
+    "fpr95": 0.3216,
+    "id_mean": -750.942558685851,
+    "ood_mean": -7362.262481739878,
+    "auroc_oriented": 0.926118815,
+    "fpr95_oriented": 0.3216,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.7572180700000001,
+    "fpr95": 0.9985,
+    "id_mean": -313.05944923934936,
+    "ood_mean": -371.09170442199706,
+    "auroc_oriented": 0.7572180700000001,
+    "fpr95_oriented": 0.9985,
+    "flipped": false
+   }
+  },
+  "dtd": {
+   "GRAM": {
+    "auroc": 0.9060784929078015,
+    "fpr95": 0.38120567375886527,
+    "id_mean": -750.942558685851,
+    "ood_mean": -18050.010446469136,
+    "auroc_oriented": 0.9060784929078015,
+    "fpr95_oriented": 0.38120567375886527,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.7028663209219856,
+    "fpr95": 0.599113475177305,
+    "id_mean": -313.05944923934936,
+    "ood_mean": -1341.0676951469259,
+    "auroc_oriented": 0.7028663209219856,
+    "fpr95_oriented": 0.599113475177305,
+    "flipped": false
+   }
+  },
+  "places365": {
+   "GRAM": {
+    "auroc": 0.6334644671232876,
+    "fpr95": 0.9056986301369863,
+    "id_mean": -750.942558685851,
+    "ood_mean": -1689.9246013134623,
+    "auroc_oriented": 0.6334644671232876,
+    "fpr95_oriented": 0.9056986301369863,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.4439829931506849,
+    "fpr95": 0.9763013698630137,
+    "id_mean": -313.05944923934936,
+    "ood_mean": -285.53633686776357,
+    "auroc_oriented": 0.5560170068493151,
+    "fpr95_oriented": 0.9441095890410959,
+    "flipped": true
+   }
+  }
+ }
+}

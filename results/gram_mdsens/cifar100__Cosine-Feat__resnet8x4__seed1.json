@@ -1,0 +1,160 @@
+{
+ "method": "Cosine-Feat",
+ "seed": 1,
+ "arch": "resnet8x4",
+ "id_dataset": "cifar100",
+ "ckpt": "<run>/output/fm_grid/fm/CosPressFM_dinov2_small_resnet8x4_cifar100_seed1_LOG_SAVE_CHECKPOINT_FREQ-1100_CALIBRATION_EVAL_EVERY-10/student_best",
+ "impl": "OpenOOD gram_postprocessor.py / mds_ensemble_postprocessor.py",
+ "gram_powers": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "mds_noise": 0.0014,
+ "mds_layers": 5,
+ "mds_alpha": "equal (no OOD-fitted alpha)",
+ "ood": {
+  "svhn": {
+   "GRAM": {
+    "auroc": 0.9079698947449293,
+    "fpr95": 0.4398432698217578,
+    "id_mean": -21.78978199753234,
+    "ood_mean": -597.8208855080836,
+    "auroc_oriented": 0.9079698947449293,
+    "fpr95_oriented": 0.4398432698217578,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.681939391902274,
+    "fpr95": 0.8358942839582053,
+    "id_mean": -317.0241025627136,
+    "ood_mean": -388.54158360165326,
+    "auroc_oriented": 0.681939391902274,
+    "fpr95_oriented": 0.8358942839582053,
+    "flipped": false
+   }
+  },
+  "tinyimagenet": {
+   "GRAM": {
+    "auroc": 0.6174269,
+    "fpr95": 0.896,
+    "id_mean": -21.78978199753234,
+    "ood_mean": -49.823214169594124,
+    "auroc_oriented": 0.6174269,
+    "fpr95_oriented": 0.896,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.498058965,
+    "fpr95": 0.9601,
+    "id_mean": -317.0241025627136,
+    "ood_mean": -314.75817729187014,
+    "auroc_oriented": 0.501941035,
+    "fpr95_oriented": 0.9716,
+    "flipped": true
+   }
+  },
+  "cifar10": {
+   "GRAM": {
+    "auroc": 0.59474448,
+    "fpr95": 0.9224,
+    "id_mean": -21.78978199753234,
+    "ood_mean": -32.180702357883156,
+    "auroc_oriented": 0.59474448,
+    "fpr95_oriented": 0.9224,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.46199314,
+    "fpr95": 0.9906,
+    "id_mean": -317.0241025627136,
+    "ood_mean": -296.114812172699,
+    "auroc_oriented": 0.53800686,
+    "fpr95_oriented": 0.9664,
+    "flipped": true
+   }
+  },
+  "lsun_c": {
+   "GRAM": {
+    "auroc": 0.95678634,
+    "fpr95": 0.2129,
+    "id_mean": -21.78978199753234,
+    "ood_mean": -1143.8007487097975,
+    "auroc_oriented": 0.95678634,
+    "fpr95_oriented": 0.2129,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.62403987,
+    "fpr95": 0.9534,
+    "id_mean": -317.0241025627136,
+    "ood_mean": -345.12839768829343,
+    "auroc_oriented": 0.62403987,
+    "fpr95_oriented": 0.9534,
+    "flipped": false
+   }
+  },
+  "mnist": {
+   "GRAM": {
+    "auroc": 0.9038251249999999,
+    "fpr95": 0.377,
+    "id_mean": -21.78978199753234,
+    "ood_mean": -195.96988450556992,
+    "auroc_oriented": 0.9038251249999999,
+    "fpr95_oriented": 0.377,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.910528735,
+    "fpr95": 0.847,
+    "id_mean": -317.0241025627136,
+    "ood_mean": -457.849693460083,
+    "auroc_oriented": 0.910528735,
+    "fpr95_oriented": 0.847,
+    "flipped": false
+   }
+  },
+  "dtd": {
+   "GRAM": {
+    "auroc": 0.9001242553191489,
+    "fpr95": 0.37570921985815603,
+    "id_mean": -21.78978199753234,
+    "ood_mean": -773.6075306019026,
+    "auroc_oriented": 0.9001242553191489,
+    "fpr95_oriented": 0.37570921985815603,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.840136090425532,
+    "fpr95": 0.43865248226950354,
+    "id_mean": -317.0241025627136,
+    "ood_mean": -1246.3082295816841,
+    "auroc_oriented": 0.840136090425532,
+    "fpr95_oriented": 0.43865248226950354,
+    "flipped": false
+   }
+  },
+  "places365": {
+   "GRAM": {
+    "auroc": 0.622289201369863,
+    "fpr95": 0.9015068493150685,
+    "id_mean": -21.78978199753234,
+    "ood_mean": -43.55469070176215,
+    "auroc_oriented": 0.622289201369863,
+    "fpr95_oriented": 0.9015068493150685,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.49439500547945203,
+    "fpr95": 0.9661095890410959,
+    "id_mean": -317.0241025627136,
+    "ood_mean": -311.1712893124933,
+    "auroc_oriented": 0.505604994520548,
+    "fpr95_oriented": 0.9599452054794521,
+    "flipped": true
+   }
+  }
+ }
+}

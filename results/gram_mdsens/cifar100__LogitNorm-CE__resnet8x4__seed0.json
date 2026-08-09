@@ -1,0 +1,160 @@
+{
+ "method": "LogitNorm-CE",
+ "seed": 0,
+ "arch": "resnet8x4",
+ "id_dataset": "cifar100",
+ "ckpt": "<run>/output/fm_grid/fm/B12_logitnorm_only_resnet8x4_cifar100_seed0/student_best",
+ "impl": "OpenOOD gram_postprocessor.py / mds_ensemble_postprocessor.py",
+ "gram_powers": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "mds_noise": 0.0014,
+ "mds_layers": 5,
+ "mds_alpha": "equal (no OOD-fitted alpha)",
+ "ood": {
+  "svhn": {
+   "GRAM": {
+    "auroc": 0.93911764366933,
+    "fpr95": 0.2924093423478795,
+    "id_mean": -1802.6341326967292,
+    "ood_mean": -30018.493502696827,
+    "auroc_oriented": 0.93911764366933,
+    "fpr95_oriented": 0.2924093423478795,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.37927138329748,
+    "fpr95": 0.972879532882606,
+    "id_mean": -314.4933973121643,
+    "ood_mean": -271.48474926558754,
+    "auroc_oriented": 0.62072861670252,
+    "fpr95_oriented": 0.8859480639213276,
+    "flipped": true
+   }
+  },
+  "tinyimagenet": {
+   "GRAM": {
+    "auroc": 0.60651406,
+    "fpr95": 0.911,
+    "id_mean": -1802.6341326967292,
+    "ood_mean": -2106.457487886649,
+    "auroc_oriented": 0.60651406,
+    "fpr95_oriented": 0.911,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.46603412499999997,
+    "fpr95": 0.9699,
+    "id_mean": -314.4933973121643,
+    "ood_mean": -297.6927898628235,
+    "auroc_oriented": 0.533965875,
+    "fpr95_oriented": 0.9596,
+    "flipped": true
+   }
+  },
+  "cifar10": {
+   "GRAM": {
+    "auroc": 0.573427895,
+    "fpr95": 0.936,
+    "id_mean": -1802.6341326967292,
+    "ood_mean": -1194.7717921623755,
+    "auroc_oriented": 0.573427895,
+    "fpr95_oriented": 0.936,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.4652480849999999,
+    "fpr95": 0.9866,
+    "id_mean": -314.4933973121643,
+    "ood_mean": -290.19509963760373,
+    "auroc_oriented": 0.5347519150000001,
+    "fpr95_oriented": 0.9572,
+    "flipped": true
+   }
+  },
+  "lsun_c": {
+   "GRAM": {
+    "auroc": 0.95807369,
+    "fpr95": 0.2478,
+    "id_mean": -1802.6341326967292,
+    "ood_mean": -17344.77203752042,
+    "auroc_oriented": 0.95807369,
+    "fpr95_oriented": 0.2478,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.33472364000000004,
+    "fpr95": 0.9874,
+    "id_mean": -314.4933973121643,
+    "ood_mean": -255.79831055450438,
+    "auroc_oriented": 0.66527636,
+    "fpr95_oriented": 0.9464,
+    "flipped": true
+   }
+  },
+  "mnist": {
+   "GRAM": {
+    "auroc": 0.98408132,
+    "fpr95": 0.051,
+    "id_mean": -1802.6341326967292,
+    "ood_mean": -20386.785393622587,
+    "auroc_oriented": 0.98408132,
+    "fpr95_oriented": 0.051,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.7668508250000001,
+    "fpr95": 0.9747,
+    "id_mean": -314.4933973121643,
+    "ood_mean": -379.219334765625,
+    "auroc_oriented": 0.7668508250000001,
+    "fpr95_oriented": 0.9747,
+    "flipped": false
+   }
+  },
+  "dtd": {
+   "GRAM": {
+    "auroc": 0.9012913386524823,
+    "fpr95": 0.373936170212766,
+    "id_mean": -1802.6341326967292,
+    "ood_mean": -27429.84200489985,
+    "auroc_oriented": 0.9012913386524823,
+    "fpr95_oriented": 0.373936170212766,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.7505206560283688,
+    "fpr95": 0.549822695035461,
+    "id_mean": -314.4933973121643,
+    "ood_mean": -1332.9929399828538,
+    "auroc_oriented": 0.7505206560283688,
+    "fpr95_oriented": 0.549822695035461,
+    "flipped": false
+   }
+  },
+  "places365": {
+   "GRAM": {
+    "auroc": 0.6110400506849316,
+    "fpr95": 0.9133150684931507,
+    "id_mean": -1802.6341326967292,
+    "ood_mean": -4092.7605203021812,
+    "auroc_oriented": 0.6110400506849316,
+    "fpr95_oriented": 0.9133150684931507,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.4641630684931507,
+    "fpr95": 0.9712328767123287,
+    "id_mean": -314.4933973121643,
+    "ood_mean": -295.43568666933663,
+    "auroc_oriented": 0.5358369315068493,
+    "fpr95_oriented": 0.9537260273972603,
+    "flipped": true
+   }
+  }
+ }
+}

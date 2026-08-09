@@ -1,0 +1,160 @@
+{
+ "method": "VanillaKD",
+ "seed": 0,
+ "arch": "resnet8x4",
+ "id_dataset": "cifar100",
+ "ckpt": "<run>/output/fm_grid/fm/B3FM_dinov2_small_resnet8x4_seed0_LOG_SAVE_CHECKPOINT_FREQ-1100_CALIBRATION_EVAL_EVERY-10/student_best",
+ "impl": "OpenOOD gram_postprocessor.py / mds_ensemble_postprocessor.py",
+ "gram_powers": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "mds_noise": 0.0014,
+ "mds_layers": 5,
+ "mds_alpha": "equal (no OOD-fitted alpha)",
+ "ood": {
+  "svhn": {
+   "GRAM": {
+    "auroc": 0.935494919714198,
+    "fpr95": 0.3112323294406884,
+    "id_mean": -17.57320438917036,
+    "ood_mean": -579.2870733377993,
+    "auroc_oriented": 0.935494919714198,
+    "fpr95_oriented": 0.3112323294406884,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.6999194683466503,
+    "fpr95": 0.9247848801475107,
+    "id_mean": -287.08906142578127,
+    "ood_mean": -332.54299982852854,
+    "auroc_oriented": 0.6999194683466503,
+    "fpr95_oriented": 0.9247848801475107,
+    "flipped": false
+   }
+  },
+  "tinyimagenet": {
+   "GRAM": {
+    "auroc": 0.63695506,
+    "fpr95": 0.8862,
+    "id_mean": -17.57320438917036,
+    "ood_mean": -37.43764212845449,
+    "auroc_oriented": 0.63695506,
+    "fpr95_oriented": 0.8862,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.54156051,
+    "fpr95": 0.95,
+    "id_mean": -287.08906142578127,
+    "ood_mean": -295.0254083236694,
+    "auroc_oriented": 0.54156051,
+    "fpr95_oriented": 0.95,
+    "flipped": false
+   }
+  },
+  "cifar10": {
+   "GRAM": {
+    "auroc": 0.593422095,
+    "fpr95": 0.9198,
+    "id_mean": -17.57320438917036,
+    "ood_mean": -25.684030887011335,
+    "auroc_oriented": 0.593422095,
+    "fpr95_oriented": 0.9198,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.50062249,
+    "fpr95": 0.9834,
+    "id_mean": -287.08906142578127,
+    "ood_mean": -278.0159318473816,
+    "auroc_oriented": 0.50062249,
+    "fpr95_oriented": 0.9834,
+    "flipped": false
+   }
+  },
+  "lsun_c": {
+   "GRAM": {
+    "auroc": 0.96201881,
+    "fpr95": 0.2106,
+    "id_mean": -17.57320438917036,
+    "ood_mean": -494.98664500129445,
+    "auroc_oriented": 0.96201881,
+    "fpr95_oriented": 0.2106,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.768430205,
+    "fpr95": 0.8805,
+    "id_mean": -287.08906142578127,
+    "ood_mean": -357.49317100982665,
+    "auroc_oriented": 0.768430205,
+    "fpr95_oriented": 0.8805,
+    "flipped": false
+   }
+  },
+  "mnist": {
+   "GRAM": {
+    "auroc": 0.839217075,
+    "fpr95": 0.6136,
+    "id_mean": -17.57320438917036,
+    "ood_mean": -91.31915518141687,
+    "auroc_oriented": 0.839217075,
+    "fpr95_oriented": 0.6136,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.9689550149999999,
+    "fpr95": 0.0569,
+    "id_mean": -287.08906142578127,
+    "ood_mean": -514.1172744903564,
+    "auroc_oriented": 0.9689550149999999,
+    "fpr95_oriented": 0.0569,
+    "flipped": false
+   }
+  },
+  "dtd": {
+   "GRAM": {
+    "auroc": 0.9136231471631205,
+    "fpr95": 0.3586879432624113,
+    "id_mean": -17.57320438917036,
+    "ood_mean": -514.6311686970749,
+    "auroc_oriented": 0.9136231471631205,
+    "fpr95_oriented": 0.3586879432624113,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.8638060017730497,
+    "fpr95": 0.4299645390070922,
+    "id_mean": -287.08906142578127,
+    "ood_mean": -843.2585300499666,
+    "auroc_oriented": 0.8638060017730497,
+    "fpr95_oriented": 0.4299645390070922,
+    "flipped": false
+   }
+  },
+  "places365": {
+   "GRAM": {
+    "auroc": 0.6342038917808219,
+    "fpr95": 0.8997260273972603,
+    "id_mean": -17.57320438917036,
+    "ood_mean": -35.162821082285284,
+    "auroc_oriented": 0.6342038917808219,
+    "fpr95_oriented": 0.8997260273972603,
+    "flipped": false
+   },
+   "MDSEns": {
+    "auroc": 0.5149705520547945,
+    "fpr95": 0.9651780821917808,
+    "id_mean": -287.08906142578127,
+    "ood_mean": -285.33074694531587,
+    "auroc_oriented": 0.5149705520547945,
+    "fpr95_oriented": 0.9651780821917808,
+    "flipped": false
+   }
+  }
+ }
+}

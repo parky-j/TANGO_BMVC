@@ -1,0 +1,16 @@
+EXPERIMENT: {NAME: "", TAG: "fm/B3FM_dinov2_small_resnet8x4_seed0", PROJECT: "fm_grid", LOGIT_STAND: false}
+DATASET: {TYPE: "cifar100", NUM_WORKERS: 2, TEST: {BATCH_SIZE: 64}}
+SOLVER:
+  BATCH_SIZE: 64
+  EPOCHS: 100
+  LR: 0.05
+  LR_DECAY_STAGES: [60,80,90]
+  LR_DECAY_RATE: 0.1
+  WEIGHT_DECAY: 0.0005
+  MOMENTUM: 0.9
+  TYPE: "SGD"
+  SEED: 0
+CALIBRATION: {ENABLED: True, N_BINS: 15, EVAL_EVERY: 20, SAVE_RELIABILITY: False}
+DISTILLER: {TYPE: "KD", TEACHER: "dinov2_small", STUDENT: "resnet8x4",
+            TEACHER_CKPT: "output/foundation/small_cifar100/head.pt"}
+KD: {TEMPERATURE: 4.0, LOSS: {CE_WEIGHT: 0.1, KD_WEIGHT: 9.0}}
