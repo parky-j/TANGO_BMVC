@@ -1,0 +1,8 @@
+# Evaluation (eval_ood.py) needs only these:
+torch>=1.13
+torchvision>=0.14
+numpy>=1.21
+pillow>=9.0
+
+# Training (train.py) additionally needs the frozen DINOv2 teacher:
+transformers>=4.30

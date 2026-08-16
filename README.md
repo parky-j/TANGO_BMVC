@@ -4,7 +4,7 @@
 
 Foundation models such as DINOv2 and CLIP are strong out-of-distribution (OOD)
 detectors out of the box, but distilling them into a small CNN breaks that
-ability: vanilla KD, DKD and feature-distillation baselines all lose 7–10 %p of
+ability: vanilla KD, DKD and feature-distillation baselines all lose 7–11 %p of
 far-OOD AUROC even while ID accuracy is preserved.
 
 **TANGO** closes that gap with a one-line change to the loss and no inference
@@ -21,13 +21,67 @@ loss = ce(z_tilde_s, y) + T**2 * kl(softmax(z_tilde_t / T), softmax(z_tilde_s / 
 Normalization is applied **during training only** — at inference the student is
 scored on raw logits, so deployment cost is identical to a standard classifier.
 
+## Quickstart
+
+```bash
+pip install -r requirements.txt
+
+# Evaluate a released TANGO student. Datasets download on first run.
+python eval_ood.py --checkpoint checkpoints/cifar100_resnet8x4/logitnormkd_seed0.pt
+```
+
+```text
+mean ||z||_2 on ID = 1.34   (paper: ~1.3 for LogitNormKD, ~31 for vanilla KD)
+
+OOD                     entropy          energy_t1
+--------------------------------------------------
+svhn               0.9777/0.105       0.1131/0.999
+```
+
+Now run the same command on the vanilla-KD baseline:
+
+```bash
+python eval_ood.py --checkpoint checkpoints/cifar100_resnet8x4/vanillakd_seed0.pt --ood svhn
+```
+
+| student (seed 0) | mean ‖z‖ | Entropy | Energy@T=1 |
+|---|---|---|---|
+| vanilla KD | ~31 | 0.839 | **0.907** |
+| **TANGO** | **~1.3** | **0.978** | 0.113 ← inverted |
+
+That is the whole paper in one table. TANGO compresses the logit magnitude ~30×,
+which moves the OOD signal off the magnitude axis and onto softmax shape.
+Entropy reads shape and wins; Energy reads magnitude and collapses — on this seed
+it inverts outright (AUROC < 0.5 = the ID/OOD ordering flipped). `eval_ood.py`
+reports AUROC **raw**, so inversions stay visible instead of being hidden by
+orientation correction.
+
+## Train from scratch
+
+```bash
+python train.py --method logitnormkd --seed 0     # TANGO
+python train.py --method vanillakd   --seed 0     # baseline
+```
+
+Defaults match `configs/cifar100_*_seed*.yaml` exactly: 100 epochs SGD, lr 0.05,
+multistep [60, 80, 90] × 0.1, weight decay 5e-4, momentum 0.9, batch 64;
+LogitNormKD `T=4, tau=0.04, ce_w=kd_w=1`; vanilla KD `T=4, alpha=0.1, beta=9`.
+The teacher is a frozen `facebook/dinov2-small` plus the released linear probe in
+`checkpoints/teacher_heads/` (needs `transformers`; ~90 MB one-time download).
+About 90 min/seed on one RTX 4080.
+
+```bash
+# 2-epoch smoke test
+python train.py --method logitnormkd --epochs 2 --limit-batches 5
+```
+
 ## Why it works, and why the usual scores stop working
 
-Removing the incentive to encode confidence in logit magnitude compresses
-‖z‖ by about 30× (31 → 1.3). The OOD signal does not disappear; it moves off the
-magnitude axis and onto the *shape* of the softmax. That single mechanism
-explains both the gain and an otherwise puzzling side effect: scores that read
-magnitude get worse on exactly the students that detect OOD better.
+Removing the incentive to encode confidence in logit magnitude compresses ‖z‖ by
+about 30× (31 → 1.3). The OOD signal does not disappear; it moves off the
+magnitude axis and onto the *shape* of the softmax. One mechanism explains both
+the gain and an otherwise puzzling side effect: scores that read magnitude get
+worse on exactly the students that detect OOD better.
 
 ![Method x score](assets/fig4_score_heatmap.png)
 
@@ -42,9 +96,18 @@ Going from vanilla KD to TANGO on the CIFAR-100 far-OOD suite:
 Entropy is therefore not an arbitrary choice — it is the simplest score that
 reads the channel the training objective moved the signal into.
 
+The gradient argument behind the compression is checkable in three lines:
+
+```python
+import torch; from tango import logit_norm
+z = torch.randn(4, 100, requires_grad=True)
+logit_norm(z, 0.04).sum().backward()
+(z.grad * z).sum(1).abs().max()        # ~1e-7: the gradient is orthogonal to z
+```
+
 ## Results
 
-**CIFAR-100 → far-OOD** (resnet8x4 student, 1.4 M params, DINOv2-S teacher, 3 seeds).
+**CIFAR-100 → far-OOD** (resnet8x4 student, 1.2 M params, DINOv2-S teacher, 3 seeds).
 far₄ = mean of MNIST/SVHN/DTD/Places365, Entropy-scored for every row.
 
 | method | ID acc | SVHN | far₄ |
@@ -71,8 +134,8 @@ Far-OOD = iNaturalist/Textures/OpenImage-O.
 
 At ImageNet scale magnitude-based scoring is genuinely strong — vanilla KD's best
 score is Energy — yet the fixed Entropy readout still leads, with no score
-selection. TANGO's own Energy inverts (0.220), which is the same
-magnitude-versus-shape signature, now deterministic rather than seed-dependent.
+selection. TANGO's own Energy inverts (0.220), the same magnitude-versus-shape
+signature, now deterministic rather than seed-dependent.
 
 TANGO also holds on CIFAR-10 ID (far₄ 0.947 vs 0.918 for the best baseline),
 ImageNet-200, ImageNet-100, a wrn\_40\_2 student, and CLIP and DINOv2-B teachers.
@@ -80,77 +143,40 @@ Near-OOD is an explicit trade-off, not an oversight: the ‖z‖ compression tha
 recovers far-OOD discards class-confidence cues, costing 6–7 %p on
 CIFAR-100 → CIFAR-10.
 
-## Usage
-
-### Check the paper's numbers (no GPU, no datasets, ~2 s)
-
-```bash
-python code/verify_paper_numbers.py
-```
-
-Re-derives every cell of Tables 1–4, the teacher rows, the detector-family table
-and the coupling deltas from the per-seed records in `results/`, and compares them
-against the printed values. Exits non-zero on any disagreement.
-
-```text
-195/195 checks passed
-All paper numbers reproduce from the released records.
-```
-
-### Load a released student
-
-```python
-import torch
-from mdistiller.models import cifar_model_dict, imagenet_model_dict
-
-net, _ = cifar_model_dict["resnet8x4"]
-model = net(num_classes=100)
-model.load_state_dict(torch.load("checkpoints/cifar100_resnet8x4/logitnormkd_seed0.pt")["model"])
-
-# ImageNet-1K
-model = imagenet_model_dict["ResNet18"](num_classes=1000, pretrained=False)
-sd = torch.load("checkpoints/imagenet1k_resnet18/logitnormkd_tau0.04.pt")["model"]
-model.load_state_dict({k.replace("_orig_mod.", ""): v for k, v in sd.items()})
-```
-
-Score with entropy on the raw logits — no teacher and no normalization at
-inference:
-
-```python
-p = model(x).softmax(1)
-score = (p * p.clamp_min(1e-12).log()).sum(1)      # higher = in-distribution
-```
-
-### Train from scratch
-
-`configs/` holds the exact configs behind the released checkpoints
-(τ = 0.04, T = 4, 100 epochs SGD, DINOv2-S teacher with a cached linear probe from
-`checkpoints/teacher_heads/`).
-
 ## Layout
 
 ```text
-results/          per-seed AUROC/FPR95 for 9 detectors x 8 training objectives
-                  x 3 seeds, on CIFAR-100, CIFAR-10, ImageNet-200 and ImageNet-100
-checkpoints/      resnet8x4 students (TANGO and vanilla KD, 3 seeds each),
-                  two ImageNet-1K ResNet18 students, teacher linear probes
-configs/          training configs for the released checkpoints
-code/             verification entry point
-assets/           figures used in this README
+tango/
+  logitnorm_kd.py   the method: LogitNormKD (and the vanilla-KD baseline)
+  scores.py         Entropy / Energy / MSP / MaxLogit + AUROC, FPR@95
+  resnet.py         resnet8x4 student
+  teacher.py        frozen DINOv2 + released linear probe
+  data.py           CIFAR-100 ID and OOD loaders, paper preprocessing
+train.py            training entry
+eval_ood.py         evaluation entry
+configs/            the exact configs behind the released checkpoints
+checkpoints/        resnet8x4 students (TANGO and vanilla KD, 3 seeds each),
+                    two ImageNet-1K ResNet18 students, teacher linear probes
 ```
 
 ## Notes for reproduction
 
-- **Orientation.** Every record stores `auroc` (the detector's published sign,
-  never flipped — a value below 0.5 means the ranking has inverted) and
-  `auroc_oriented` (the better of the two orientations, the convention of the
-  paper's Tables 1–2 and Fig. 3). TANGO + Energy is where this matters: 0.617 and
-  0.796 on the CIFAR-100 far aggregate are the same measurement.
+- **Preprocessing matters.** OOD images are resized to 32×32 and normalized with
+  the **ID** dataset's statistics. Changing the constants in `tango/data.py`
+  changes the numbers.
+- **Orientation.** `eval_ood.py` reports AUROC without orientation correction, so
+  a value below 0.5 means the ranking inverted. The paper's Tab. 1 and Fig. 3
+  orient each (method, score) pair empirically; supp. Tab. 20 reports raw. TANGO
+  + Energy is where this matters.
+- **Seeds.** Released checkpoints are individual seeds; the paper's tables are
+  3-seed means. TANGO's Energy on CIFAR-100 → SVHN inverts on seed 0 and not on
+  seeds 1–2 — itself a symptom of the collapsed magnitude axis.
 - **NINCO.** For ImageNet, load `NINCO/NINCO_OOD_classes` (5,878 images). A
   recursive glob over the NINCO release also picks up
   `popular_datasets_subsamples` and inflates near-OOD by several points.
-- **MDSEns** uses equal ensemble weights. OpenOOD's `alpha_selector` fits them by
-  logistic regression on ID-vs-OOD validation data, which leaks OOD information
-  into the detector.
-
-
+- **Manual OOD splits.** `svhn`, `cifar10`, `mnist`, `dtd` download automatically.
+  `tin`, `places365`, `lsun_c` need a local copy; see the docstring in
+  `tango/data.py` for the expected layout.
+- **MDSEns** (in the detector table above) uses equal ensemble weights. OpenOOD's
+  `alpha_selector` fits them by logistic regression on ID-vs-OOD validation data,
+  which leaks OOD information into the detector.
