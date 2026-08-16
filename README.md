@@ -153,7 +153,7 @@ assets/           figures used in this README
   logistic regression on ID-vs-OOD validation data, which leaks OOD information
   into the detector.
 
-## Citation
+// ## Citation
 
 ```bibtex
 @inproceedings{park2026tango,
