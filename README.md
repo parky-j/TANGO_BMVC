@@ -153,14 +153,4 @@ assets/           figures used in this README
   logistic regression on ID-vs-OOD validation data, which leaks OOD information
   into the detector.
 
-// ## Citation
 
-```bibtex
-@inproceedings{park2026tango,
-  title     = {TANGO: Logit-Normalized Distillation Preserves OOD Ability in
-               Foundation Models and Reshapes Which Scores Work},
-  author    = {Park, Yeongje and Lee, Eui Chul},
-  booktitle = {British Machine Vision Conference (BMVC)},
-  year      = {2026}
-}
-```
