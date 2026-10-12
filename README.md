@@ -1,6 +1,6 @@
 # TANGO: Logit-Normalized Distillation Preserves OOD Ability in Foundation Models and Reshapes Which Scores Work
 
-**BMVC 2026** · Yeongje Park, Eui Chul Lee (Sangmyung University)
+**BMVC 2026 -- to appear** · Yeongje Park, Eui Chul Lee (Sangmyung University)
 
 Foundation models such as DINOv2 and CLIP are strong out-of-distribution (OOD)
 detectors out of the box, but distilling them into a small CNN breaks that
