@@ -44,9 +44,6 @@ Foundation models such as DINOv2 and CLIP exhibit strong out-of-distribution (OO
 
 <sub>CIFAR-100: three-seed means; ImageNet-1K: single runs. Far-OOD datasets and evaluation details are given below.</sub>
 
-> [!IMPORTANT]
-> **Far-OOD improvement comes with a near-OOD trade-off.** On CIFAR-100 → CIFAR-10, TANGO loses approximately **6–7 pp** of near-OOD performance. We report this explicitly rather than treating OOD detection as a single, uniform objective.
-
 ## Results
 
 ### CIFAR-100 → Far-OOD
