@@ -1,7 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/BMVC-2026%20%C2%B7%20To%20Appear-5B5BD6?style=for-the-badge" alt="BMVC 2026 · To Appear" />
   <img src="https://img.shields.io/badge/Task-OOD%20Detection-00897B?style=for-the-badge" alt="OOD Detection" />
-  <img src="https://img.shields.io/badge/Inference-No%20Extra%20Cost-276EF1?style=for-the-badge" alt="No Extra Inference Cost" />
 </p>
 
 <h1 align="center">TANGO : Logit-Normalized Distillation Preserves OOD Ability in Foundation Models and Reshapes Which Scores Work</h1>
