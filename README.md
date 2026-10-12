@@ -42,7 +42,6 @@ Foundation models such as DINOv2 and CLIP exhibit strong out-of-distribution (OO
 | ImageNet-1K | ID accuracy | **0.676** | 0.675 | −0.1 pp |
 | ImageNet-1K | Far-OOD AUROC · Entropy | 0.794 | **0.880** | **+8.6 pp** |
 
-<sub>CIFAR-100: three-seed means; ImageNet-1K: single runs. Far-OOD datasets and evaluation details are given below.</sub>
 
 ## Results
 
